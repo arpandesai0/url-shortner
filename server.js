@@ -8,8 +8,9 @@ const app = express();
 mongoose.connect(config.MONGO_URL, () => console.log("Connected to database"));
 
 //starting the server
-app.listen(config.PORT, () => {
-  console.log("Server running at port: " + config.PORT);
+const PORT = process.env.PORT || config.PORT;
+app.listen(PORT, () => {
+  console.log("Server running at port: " + PORT);
 });
 
 //middlewares
