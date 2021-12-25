@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Routes } from "react-router";
+// import HeroVideo from "./components/HeroVideo";
+import Navbar from "./components/Navbar.js";
+import { useEffect } from "react";
+import Redirect from "./components/Redirect";
+import Home from "./components/Home";
+import Track from "./components/Track";
+import axios from "axios";
+import AboutUs from "./components/AboutUs";
 
 function App() {
+  axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bg-stone-100">
+      <Navbar />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/track" element={<Track />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/:id" element={<Redirect />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
